@@ -6,6 +6,7 @@ inherit cross
 SRC_URI += "\
         file://bsd_svid_source.patch \
         file://ccache.patch \
+        file://0001-cmd-ld-set-alignment-for-the-.rel.plt-section-on-32-.patch \
         "
 
 do_compile() {
@@ -16,8 +17,11 @@ do_compile() {
   export GOOS="linux"
 
   export GOARCH="${TARGET_ARCH}"
+  #golang only support 386, amd64 and arm architecture.
   if [ "${TARGET_ARCH}" = "x86_64" ]; then
     export GOARCH="amd64"
+  elif [ "${TARGET_ARCH}" = "i586" ]; then
+    export GOARCH="386"
   fi
   if [ "${TARGET_ARCH}" = "arm" ]
   then
