@@ -3,6 +3,9 @@ require go_${PV}.inc
 
 inherit cross
 
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+
 SRC_URI += "\
         file://bsd_svid_source.patch \
         file://ccache.patch \
